@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UsuarioRepository : MongoRepository<Usuario, String> {
-    fun findByUsuario(usuario: String) : Usuario
+    fun findById(id: Int): Usuario
+    fun findByUsuario(usuario: String) : List<Usuario>
 }

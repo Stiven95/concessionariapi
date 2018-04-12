@@ -15,8 +15,19 @@ class UsuarioService {
         return usuarioRepository.findAll()
     }
 
-    fun buscaPorUsuario(usuario: String) : Usuario {
-        return usuarioRepository.findByUsuario(usuario)
+    fun login(usuario: Usuario): Usuario {
+
+        val usuarioLogin = usuarioRepository.findByUsuario(usuario.usuario)
+
+        if(usuarioLogin.isNotEmpty()) {
+            if (usuarioLogin.get(0).senha.equals(usuario.senha)) {
+                return usuarioLogin.get(0)
+            } else {
+                return Usuario("", "", "", "")
+            }
+        }else{
+            return Usuario("", "", "", "")
+        }
     }
 
     fun salvar(usuario: Usuario) {

@@ -12,22 +12,36 @@ class CarroService {
     lateinit var carroRepository: CarroRepository
 
     fun buscarTodosCarros() : List<Carro> {
-        return carroRepository.findAll()
+        return this.carroRepository.findAll()
     }
 
     fun buscaCarroPorAno(ano: Int) : List<Carro> {
-        return carroRepository.findByAno(ano)
+        return this.carroRepository.findByAno(ano)
     }
 
     fun buscaCarroPorMarca(marca: String) : List<Carro> {
-        return carroRepository.findByMarca(marca)
+        return this.carroRepository.findByMarca(marca)
     }
 
-    fun deletar(carro: Carro) {
-        return carroRepository.delete(carro)
+    fun buscarCarroPorId(id: Int): Carro {
+        return this.carroRepository.findById(id)
+    }
+
+    fun deletar(id: String) {
+        val carro = Carro(id, "", "", 0, "", "", 0, "")
+        return this.carroRepository.delete(carro)
+    }
+
+    fun update(carro: Carro) {
+
+        if(carro.id.isNullOrBlank()) {
+            throw Exception("Preencha o Id")
+        }
+
+        this.carroRepository.save(carro)
     }
 
     fun salvar(carro: Carro) {
-        carroRepository.save(carro)
+        this.carroRepository.save(carro)
     }
 }
