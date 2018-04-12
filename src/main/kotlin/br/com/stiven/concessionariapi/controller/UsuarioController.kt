@@ -12,6 +12,11 @@ class UsuarioController {
     @Autowired
     lateinit var usuarioService: UsuarioService
 
+    @GetMapping
+    fun buscarTodos() :List<Usuario> {
+        return this.usuarioService.buscaTodosUsuarios()
+    }
+
     @PostMapping
     @RequestMapping("/autentica")
     fun login(@RequestBody usuario: Usuario) :Usuario {
